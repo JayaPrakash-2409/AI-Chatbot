@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chatbot — Contextual Memory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- All CSS and JS are in the same flat folder -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">⬡</div>
+        <span class="brand-name">NeuralChat</span>
+      </div>
+
+      <div class="domain-selector">
+        <p class="sidebar-label">SUPPORT DOMAIN</p>
+        <div class="domain-options">
+          <button class="domain-btn active" data-domain="ecommerce">
+            <span class="domain-icon">🛒</span>
+            <div><div class="domain-title">E-Commerce</div><div class="domain-sub">Orders & Returns</div></div>
+          </button>
+          <button class="domain-btn" data-domain="banking">
+            <span class="domain-icon">🏦</span>
+            <div><div class="domain-title">Banking</div><div class="domain-sub">Finance & Cards</div></div>
+          </button>
+          <button class="domain-btn" data-domain="general">
+            <span class="domain-icon">🤖</span>
+            <div><div class="domain-title">General</div><div class="domain-sub">All-purpose AI</div></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="memory-panel">
+        <p class="sidebar-label">CONTEXT MEMORY</p>
+        <div class="memory-stats">
+          <div class="stat-row"><span class="stat-label">Session ID</span><span class="stat-value" id="sessionId">—</span></div>
+          <div class="stat-row"><span class="stat-label">Context Depth</span><span class="stat-value" id="contextDepth">0 exchanges</span></div>
+          <div class="stat-row"><span class="stat-label">Intent</span><span class="stat-value" id="lastIntent">—</span></div>
+          <div class="stat-row">
+            <span class="stat-label">Confidence</span>
+            <div class="confidence-bar"><div class="confidence-fill" id="confidenceFill" style="width:0%"></div></div>
+          </div>
+        </div>
+        <button class="clear-btn" id="clearMemory">🗑 Clear Memory</button>
+      </div>
+
+      <div class="quick-prompts">
+        <p class="sidebar-label">QUICK PROMPTS</p>
+        <div id="quickPromptList">
+          <button class="quick-btn" data-msg="Where is my order #12345?">📦 Track an order</button>
+          <button class="quick-btn" data-msg="I want to return a damaged item">↩ Return an item</button>
+          <button class="quick-btn" data-msg="What is your refund policy?">💰 Refund policy</button>
+          <button class="quick-btn" data-msg="How long does shipping take?">🚚 Shipping info</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-area">
+      <header class="chat-header">
+        <div class="agent-info">
+          <div class="agent-avatar" id="agentAvatar">A</div>
+          <div>
+            <div class="agent-name" id="agentName">Aria</div>
+            <div class="agent-status"><span class="status-dot"></span><span id="agentStatusText">Online · E-Commerce Support</span></div>
+          </div>
+        </div>
+        <div class="model-badge">claude-sonnet-4 · Contextual Memory</div>
+      </header>
+
+      <div class="messages-container" id="messagesContainer">
+        <div class="welcome-message" id="welcomeMessage">
+          <div class="welcome-icon">⬡</div>
+          <h2>Hi, I'm Aria!</h2>
+          <p>Your AI support assistant with contextual memory. I remember our entire conversation — ask follow-up questions naturally!</p>
+          <div class="welcome-features">
+            <div class="feature-tag">🧠 Context Memory</div>
+            <div class="feature-tag">🎯 Intent Detection</div>
+            <div class="feature-tag">💬 Multi-turn Dialogue</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="suggestions-bar" id="suggestionsBar" style="display:none">
+        <div class="suggestions-list" id="suggestionsList"></div>
+      </div>
+
+      <div class="input-area">
+        <div class="input-wrapper">
+          <textarea id="messageInput" placeholder="Ask me anything... I remember our conversation context!" rows="1"></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Send">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+        <div class="input-footer">
+          <span>Powered by Claude API + Contextual Window Memory</span>
+          <span id="charCount">0 / 500</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JS is also in the same flat folder -->
+  <script src="chatbot.js"></script>
+</body>
+</html>
